@@ -16,9 +16,6 @@
     "autoload": {
         "psr-0": {
             "Doctrine": "lib/"
-        },
-        "files": [
-            "lib/Doctrine.php"
-        ]
+        }
     }
 }
