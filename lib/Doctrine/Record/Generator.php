@@ -176,7 +176,7 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
 
         $this->setTableDefinition();
         $this->setUp();
-
+  
         $this->generateClassFromTable($this->_table);
 
         $this->buildChildDefinitions();
@@ -248,7 +248,7 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
         if ( ! isset($this->_options['children'])) {
             throw new Doctrine_Record_Exception("Unknown option 'children'.");
         }
-
+   
         foreach ($this->_options['children'] as $child) {
             if ($child instanceof Doctrine_Template) {
                 if ($child->getPlugin() !== null) {
@@ -264,6 +264,7 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
             } else {
                 $this->_table->addGenerator($child, get_class($child));
                 $child->initialize($this->_table);
+                
             }
         }
     }
@@ -449,7 +450,7 @@ abstract class Doctrine_Record_Generator extends Doctrine_Record_Abstract
         if (isset($this->_options['listeners'])) {
             $definition['listeners'] = $this->_options['listeners'];
         }
-
+  
         $builder = new Doctrine_Import_Builder();
         $builderOptions = isset($this->_options['builderOptions']) ? (array) $this->_options['builderOptions']:array();
         $builder->setOptions($builderOptions);

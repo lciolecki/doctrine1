@@ -226,8 +226,12 @@ abstract class Doctrine_Configurable extends Doctrine_Locator_Injectable
     {
         if ( ! isset($this->attributes[Doctrine_Core::ATTR_RECORD_LISTENER]) ||
              ! ($this->attributes[Doctrine_Core::ATTR_RECORD_LISTENER] instanceof Doctrine_Record_Listener_Chain)) {
-
-            $this->attributes[Doctrine_Core::ATTR_RECORD_LISTENER] = new Doctrine_Record_Listener_Chain();
+            
+            if ($this->getParent() && $this->getParent()->getRecordListener() instanceof Doctrine_Record_Listener_Chain ) {
+                $this->setRecordListener(clone $this->getParent()->getRecordListener());               
+            } else {
+                $this->setRecordListener(new Doctrine_Record_Listener_Chain());
+            }
         }
         $this->attributes[Doctrine_Core::ATTR_RECORD_LISTENER]->add($listener, $name);
 
